@@ -65,7 +65,7 @@ class GraphBasedInterpolation(object):
         SC=test_index
         SC_Matrix=np.dot(self.laplace_matrix,self.laplace_matrix).take(np.asarray(SC,int),axis=0).take(np.asarray(SC,int),axis=1)
 
-        ws=abs(scipy.sparse.linalg.eigs(SC_Matrix,k=1,which='SM',return_eigenvectors=False)) #return the smallest eigenvalues
+        ws=abs(scipy.sparse.linalg.eigs(SC_Matrix,k=1,which='SM',return_eigenvectors=False)) #return the smallest eigenvalue
         UK=self.eigenvectors.T[self.eigenvalues<ws]
         UKS=UK.take(np.asarray(S,int),axis=1).T
         UKSC=UK.take(np.asarray(SC,int),axis=1).T

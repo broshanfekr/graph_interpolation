@@ -5,4 +5,4 @@
 
 # Literature
 
-Signal processing techniques for interpolation in graph structured data (ICASSP,2013 IEEE International Conference)
+Signal processing techniques for interpolation in graph structured data (ICASSP, 2013 IEEE International Conference)

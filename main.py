@@ -27,14 +27,15 @@ class test_bench:
     def classifier(self,method_list=['lda']):
         # gender is label, use scaled_data to predict gender  
         kf = KFold(n_splits = 5,shuffle = True)
-        turn_index = 1
-        error_cnt = 0
         for method in method_list:
+            print("Use method %s..." % method)
+            turn_index = 1
+            error_cnt = 0
             for train_index,test_index in kf.split(self.gender):
                 predicted_gender=None
                 if(method=='lda'):
                     lda = LinearDiscriminantAnalysis()
-                    lda.fit(self.scaled_data[train_index],self.gender[train_index])
+                    lda.fit(self.scaled_data[train_index],self.gender[train_index]) # cannot supress user waring: variables are collinear 
                     predicted_gender = lda.predict(self.scaled_data[test_index])
                 elif(method=='gi'):
                     gi = GraphBasedInterpolation(modify_weight=True)
@@ -42,15 +43,11 @@ class test_bench:
                     predicted_gender = (gi.predict(train_index,test_index,self.gender[train_index])>0.5)
                 else:
                     raise(Exception("method %s not implemented" % method))
-                print("Use method %s..." % method)
-                # collect two types of errors
-                # since the number of boys is larger than the number of girls
-                # P_e(boy | girl) and P_e(girl | boy)
                 comparision_result = predicted_gender == self.gender[test_index]
                 error_case = np.where(np.logical_not(comparision_result))
                 error_case_index = test_index[error_case]
                 for i in error_case_index:
-                    print('Turn ',turn_index,self.gender[i],'gender_index',i)
+                    print('Turn ',turn_index,'error at gender_index',i)
                 turn_index += 1
                 error_cnt +=len(error_case_index)
                 # as can be seen, use lda, the error is very small, it means that we can use the body data to discriminate gender very well
