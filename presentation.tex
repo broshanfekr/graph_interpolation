@@ -29,7 +29,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{kNN Method to predict user rating on movies}
+\frametitle{k-nearest neighbors}
 \begin{columns}
 \column{0.5\textwidth}
 \begin{itemize}
@@ -44,13 +44,13 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{issues of kNN}
+\frametitle{Issues}
 \begin{columns}
 \column{0.5\textwidth}
 \begin{itemize}
-\item discard mutual information between movie 1,2,5
+\item discard mutual information between movie 1,2,5\\\quad
 \item predict rating 3,4 respectively
-\item jointly prediction with all information used will improve the \textit{accuracy} but also increase the \textit{complexity}.
+%\item jointly prediction with all information used will improve the \textit{accuracy} but also increase the \textit{complexity}.
 \end{itemize}
 \column{0.5\textwidth}
 \includegraphics[width=0.5\textwidth]{movie5_knn_issues.eps}
@@ -60,21 +60,21 @@
 \begin{frame}
 \frametitle{Problem Reformulation}
 \begin{columns}
-\column{0.5\textwidth}
+\column{0.6\textwidth}
 \begin{itemize}
-\item $f(1),f(2),f(5)$ are known
-\item \textit{interpolate} $f(3),f(4)$
-\item $\bm{f}=[f(1),f(2),f(3),f(4),f(5)]^T$
+\item $f(1),f(2),f(5)$ known \\\quad
+\item \textit{interpolate} $f(3),f(4)$\\\quad
+\item $\bm{f}=[f(1),f(2),f(3),f(4),f(5)]^T$\\\quad
 \item $\bm{f}=f(1)\bm{\Theta}_1 + f(2)\bm{\Theta}_2 + f(5)\bm{\Theta}_5$
 \end{itemize}
-What is the space spanned by $\bm{\Theta}_1,\bm{\Theta}_2,\bm{\Theta}_5$？
-\column{0.5\textwidth}
-\includegraphics[width=0.5\textwidth]{movie5.eps}
+%What is the space spanned by $\bm{\Theta}_1,\bm{\Theta}_2,\bm{\Theta}_5$？
+\column{0.4\textwidth}
+\includegraphics[width=0.6\textwidth]{movie5.eps}
 \end{columns}
 \end{frame}
 
 \begin{frame}
-\frametitle{band limited graph signal reconstruction}
+\frametitle{Band Limited Graph Signal Reconstruction}
 \begin{block}{Nyquist Shannon sampling theorem}
 If a continuous signal is band-limited, it can be reconstructed by discrete sampling without loss.
 \end{block}
@@ -157,17 +157,17 @@ If a graph signal is band-limited, it is uniquely determined by their values on 
 %\end{definition}
 %\end{frame}
 \begin{frame}
-\frametitle{Reconstruction from basis}
+\frametitle{Reconstruction from Basis}
 \begin{block}{Critial Frequency}
 If the graph signal is band-limited, its spectrum decomposition has only components less than critical frequency $\omega^*_S$.
 \begin{equation}
  \bm{f} = \sum_{i}x_i\bm{v}_i
 \end{equation}
-where $\bm{v}_i$ is the eigenvector with eigenvalues less than $\omega^*_S$.
+where $\bm{v}_i$ is the eigenvector with corresponding eigenvalue less than $\omega^*_S$.
 \end{block}
 \begin{block}{Least Square}
 \end{block}
-$\bm{f}$ known only partially, least square techinque can be used to solve $x_i$
+$\bm{f}$ known only partially, least square techinque used to solve $x_i$
 
 \end{frame}
 \begin{frame}
@@ -187,9 +187,10 @@ $\bm{f}$ known only partially, least square techinque can be used to solve $x_i$
 \end{block}
 \end{frame}
 \begin{frame}
-\frametitle{Problems for Graph Interpolation}
+\frametitle{Issues}
 \begin{itemize}
-\item Edge weight from data features
+\item Larger error rate\\\quad
+\item Different choice of edge weight\\\quad
 \item Heuristic critical frequency
 \end{itemize}
 \end{frame}
